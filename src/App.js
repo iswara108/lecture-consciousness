@@ -18,8 +18,9 @@ const Levels = styled.div`
 
 const Button = styled.button`
   border-radius: 35%;
-  padding: 0.5rem 1rem;
+  padding: 1rem 2rem;
   border: grey 1px solid;
+  font-size: 2rem;
 `
 
 const CaptionsComponent = styled.div`
@@ -28,6 +29,21 @@ const CaptionsComponent = styled.div`
   grid-template-rows: 1fr max-content;
   height: 60vh;
   justify-items: center;
+`
+
+const Item = styled.p`
+  .impress-enabled .step.present &.delay-2s {
+    transform: translateX(100px);
+    transition: all 0.5s 2s;
+  }
+  .impress-enabled .step.present &.delay-2-5s {
+    transform: translateX(100px);
+    transition: all 0.5s 2.5s;
+  }
+  .impress-enabled .step.present &.delay-3s {
+    transform: translateX(100px);
+    transition: all 0.5s 3s;
+  }
 `
 
 function App() {
@@ -41,7 +57,7 @@ function App() {
           </p>
         }
       >
-        <Step id="overview" data={{ x: -1000, y: 3000, scale: 20 }} />
+        <Step id="overview" data={{ x: 0, y: 5000, scale: 10 }} />
         <Step id="two-paths" data={{ x: 1000, y: 2000 }} className="active">
           <CenteredImage
             src="/images/two-paths.jpg"
@@ -49,41 +65,68 @@ function App() {
             height={1000}
           />
         </Step>
-        <Step id="atlantis" data={{ x: 1000, y: 5000 }}>
+        <Step id="atlantis" data={{ x: 2000, y: 3000 }}>
           <CenteredImage src="/images/pleasant-path.jpg" alt="Pleasant Path" />
         </Step>
-        <Step id="yoga-retreat" data={{ x: -1000, y: 5000 }}>
+        <Step id="yoga-retreat" data={{ x: 0, y: 3000 }}>
           <CenteredImage src="/images/good-path.jpg" alt="Pleasant Path" />
         </Step>
         <Step id="two-paths-repeat" data={{ x: 1000, y: 2000 }} />
-        <Step id="churchill" data={{ x: -500, y: 2000, rotateY: -90 }}>
+        <Step id="levels-of-mind" data={{ x: -1000, y: 5000, scale: 8 }}>
+          <h3>Levels of the Mind</h3>
+          <Levels>
+            <Item className="delay-3s">Intuition</Item>
+            <Item className="delay-2-5s">Intellect</Item>
+            <Item className="delay-2s">Instinct</Item>
+          </Levels>
+        </Step>
+        <Step
+          id="subconscious-mind"
+          data={{ x: -1000, y: 7000, z: -1000, scale: 2 }}
+          className="active"
+        >
+          <h3>Subconscious Mind</h3>
+          <Levels>
+            <p>1. Protective Instinct</p>
+            <p>2. Herd Instinct</p>
+            <p>3. Forming Positive Habits</p>
+          </Levels>
+        </Step>
+        <Step
+          id="churchill"
+          data={{ x: -1000, y: 7000, z: -1000, scale: 0.1, rotateY: -90 }}
+        >
           <CenteredImage
             src="/images/winston-churchill-cigar.jpg"
             alt="Winston Churchill"
           />
         </Step>
-        <Step id="levels-of-mind" data={{ x: -1000, y: 9000, scale: 8 }}>
-          <h3>Levels of the Mind</h3>
-          <Levels>
-            <p>Intuition</p>
-            <p>Intellect</p>
-            <p>Instinct</p>
-          </Levels>
+        <Step
+          id="controlled-by-leader"
+          data={{
+            x: -1000,
+            y: 10800,
+            z: -1000,
+            scale: 0.1,
+            rotateY: -90
+          }}
+        >
+          <CenteredImage
+            src="/images/controlled-by-leader.jpg"
+            alt="Pinocchio"
+          />
         </Step>
         <Step
-          id="subconscious-mind"
-          data={{ x: -1000, y: 11000, z: -10000, scale: 2 }}
-        >
-          <h3>Subconscious Mind</h3>
-          <Levels>
-            <p>Protective Instinct</p>
-            <p>Herd Instinct</p>
-            <p>Forming Habits</p>
-          </Levels>
-        </Step>
-        <Step id="story-captions" data={{ x: 8000, y: 9000, scale: 3 }}>
+          id="subconscious-mind-repeat"
+          data={{ x: -1000, y: 7000, z: -1000, scale: 2 }}
+        />
+        <Step id="story-captions" data={{ x: 3000, y: 5000, scale: 3 }}>
           <ClosedCaptions />
         </Step>
+        <Step
+          id="subconscious-mind-repeat-2"
+          data={{ x: -1000, y: 7000, z: -1000, scale: 2 }}
+        />
       </Impress>
     </div>
   )
@@ -94,7 +137,7 @@ function ClosedCaptions() {
 
   return (
     <CaptionsComponent>
-      <p>{storyLines[line]}</p>
+      <p style={{ fontSize: '120%' }}>{storyLines[line]}</p>
       <div>
         <Button
           disabled={line === 0}
@@ -115,7 +158,7 @@ function ClosedCaptions() {
         >
           Next
         </Button>
-      </div>{' '}
+      </div>
     </CaptionsComponent>
   )
 }

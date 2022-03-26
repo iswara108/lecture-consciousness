@@ -71,6 +71,8 @@ const CaptionsComponent = styled.div`
 `
 
 const Item = styled.p`
+  transition: all 0.5s;
+
   .impress-enabled .step.present &.delay-2s {
     transform: translateX(100px);
     transition: all 0.5s 2s;

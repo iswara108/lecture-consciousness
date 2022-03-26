@@ -2,12 +2,51 @@ import React from 'react'
 import { Impress, Step } from 'react-impressjs'
 import { storyLines } from './transription-un-annex-story'
 import 'react-impressjs/styles/react-impressjs.css'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+
+const fadeOut = keyframes`
+from {
+  opacity:1;
+}
+
+to {
+  opacity:0;
+}
+`
 
 const CenteredImage = styled.img`
   width: 100%;
 `
 
+const CenteredImageRoundedFadeIn = styled(CenteredImage)`
+  border-radius: 50%;
+`
+
+const BlackFadingOutCircle = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: black;
+  top: 0;
+  left: 0;
+
+  .impress-enabled .step.present & {
+    animation-name: ${fadeOut};
+    animation-duration: 10s;
+    animation-delay: 2s;
+    animation-fill-mode: forwards;
+  }
+`
+
+function FlatEarthAnimation() {
+  return (
+    <div style={{ position: 'relative' }}>
+      <CenteredImageRoundedFadeIn src="/images/flat-earth" alt="Flat Earth" />
+      <BlackFadingOutCircle />
+    </div>
+  )
+}
 const Levels = styled.div`
   display: flex;
   flex-direction: column;
@@ -92,10 +131,7 @@ function App() {
             <p>3. Forming Positive Habits</p>
           </Levels>
         </Step>
-        <Step
-          id="churchill"
-          data={{ x: -1000, y: 7000, z: -1000, scale: 0.1, rotateY: -90 }}
-        >
+        <Step id="churchill" data={{ x: -3000, y: 9000, z: -1000, scale: 0.5 }}>
           <CenteredImage
             src="/images/winston-churchill-cigar.jpg"
             alt="Winston Churchill"
@@ -105,15 +141,39 @@ function App() {
           id="controlled-by-leader"
           data={{
             x: -1000,
-            y: 10800,
+            y: 9000,
             z: -1000,
-            scale: 0.1,
-            rotateY: -90
+            scale: 0.5
           }}
         >
           <CenteredImage
             src="/images/controlled-by-leader.jpg"
             alt="Pinocchio"
+          />
+        </Step>
+        <Step
+          id="flat-earth"
+          data={{
+            x: 1000,
+            y: 9000,
+            z: -1000,
+            scale: 0.5
+          }}
+        >
+          <FlatEarthAnimation />
+        </Step>
+        <Step
+          id="god-as-an-object"
+          data={{
+            x: 3000,
+            y: 9000,
+            z: -1000,
+            scale: 0.5
+          }}
+        >
+          <CenteredImage
+            src="/images/god-the-father.jpg"
+            alt="God As the Father"
           />
         </Step>
         <Step
